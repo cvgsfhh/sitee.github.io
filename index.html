@@ -1,0 +1,12 @@
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تبدیل ویس به صدا</title>
+
+
+    <h1>تبدیل ویس به صدا</h1>
+    <input type="file" id="voiceInput" accept="audio/*">
+    <select id="selectFormat">        <option value="audio/mp3">MP3</option>        <option value="audio/wav">WAV</option>        <option value="audio/ogg">OGG</option>    </select>
+    <button onclick="convertVoice()">تبدیل</button>
+    
+    <script><br/>        function convertVoice() {<br/>            const voiceInput = document.getElementById('voiceInput');<br/>            const selectedFormat = document.getElementById('selectFormat').value;<br/>            <br/>            if (voiceInput.files.length > 0) {<br/>                const voiceFile = voiceInput.files[0];<br/>                const voiceURL = URL.createObjectURL(voiceFile);<br/>                <br/>                const audioTag = document.createElement('audio');<br/>                audioTag.src = voiceURL;<br/>                audioTag.controls = true;<br/>                document.body.appendChild(audioTag);<br/>                <br/>                const downloadLink = document.createElement('a');<br/>                downloadLink.href = voiceURL;<br/>                downloadLink.download = `converted_audio.${selectedFormat.split('/')[1]}`;<br/>                downloadLink.textContent = 'دانلود';<br/>                document.body.appendChild(downloadLink);<br/>            } else {<br/>                alert('لطفا فایل ویس را انتخاب کنید.');<br/>            }<br/>        }<br/>    
